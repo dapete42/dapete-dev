@@ -67,7 +67,7 @@
     </dependencies>
 
     <build>
-        <finalName>wikilist</finalName>
+        <finalName>dapete-dev</finalName>
         <plugins>
             <plugin>
                 <groupId>${quarkus.platform.group-id}</groupId>

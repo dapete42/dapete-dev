@@ -1,1 +1,1 @@
-web: java -jar target/wikilist-runner.jar
+web: java -jar target/dapete-dev-runner.jar
