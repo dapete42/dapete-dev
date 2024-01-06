@@ -1,0 +1,8 @@
+# Maven
+/.mvn/wrapper/maven-wrapper.jar
+/target/
+/*/target/
+/site/
+# IntelliJ IDEA
+/.idea/
+*.iml

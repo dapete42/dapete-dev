@@ -1,0 +1,1 @@
+web: java -jar target/wikilist-runner.jar
