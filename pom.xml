@@ -112,4 +112,86 @@
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>tmp_builder-order.toml</id>
+            <activation>
+                <file>
+                    <exists>/tmp_builder/order.toml</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <target>
+                                        <echo>====================================================</echo>
+                                        <echo>========== profile tmp_builder-order.toml ==========</echo>
+                                        <echo>====================================================</echo>
+                                    </target>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>heroku-build</id>
+            <activation>
+                <file>
+                    <exists>/workspace/pom.xml</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>verify-apt-ant</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <target>
+                                        <echo>Verify Graphviz has been installed and can be executed</echo>
+                                        <exec executable="/layers/fagiani_apt/apt/usr/bin/dot">
+                                            <arg value="--version"/>
+                                        </exec>
+                                    </target>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-verifier-plugin</artifactId>
+                        <version>1.1</version>
+                        <executions>
+                            <execution>
+                                <id>verify-apt-verifier-plugin</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>verify</goal>
+                                </goals>
+                                <configuration>
+                                    <verificationFile>src/test/verifier/heroku-build.xml</verificationFile>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 </project>
